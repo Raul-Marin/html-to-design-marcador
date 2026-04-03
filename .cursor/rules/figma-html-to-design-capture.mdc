@@ -1,0 +1,25 @@
+---
+description: Figma html-to-design en modo solo-script por defecto (sin captura MCP salvo petición explícita).
+alwaysApply: true
+---
+
+# Figma — html-to-design
+
+Las rutas (p. ej. `.cursor/skills/...`) son **relativas a la raíz del repositorio**; funcionan igual en cualquier máquina si el proyecto se abre como carpeta/workspace en Cursor.
+
+Antes de tocar **capture** / **html-to-design** en este proyecto:
+
+1. Lee y sigue **`.cursor/skills/figma-html-to-design-script-only/SKILL.md`**.
+2. **Por defecto:** solo añadir script en HTML/shell; **no** llamar a `generate_figma_design` ni hacer poll, salvo que el usuario pida explícitamente **capturar o mandar la web a Figma**.
+3. Página servida por **`http://`**, nunca `file://`.
+
+## Misma norma en otras CLIs
+
+**Cursor** usa `.cursor/`; **Claude Code, Codex y Copilot CLI no lo cargan solos.** Para el mismo criterio, copia esta regla + el `SKILL.md` al fichero que indique cada producto (o un `docs/*.md` compartido + `@import` / copia donde toque).
+
+| Herramienta | Dónde va la norma (resumen según doc oficial) | Doc |
+|-------------|-----------------------------------------------|-----|
+| **Cursor** | `.cursor/rules/*.mdc` + `.cursor/skills/.../SKILL.md` | — |
+| **Claude Code** | `CLAUDE.md` o `.claude/CLAUDE.md` (`~/.claude/CLAUDE.md` usuario); reglas en `.claude/rules/`; importar con `@ruta`. **No usa `AGENTS.md` por defecto** — puedes `CLAUDE.md` con `@AGENTS.md`. | [Memory](https://code.claude.com/docs/en/memory) |
+| **Codex CLI** | `~/.codex` → `AGENTS.override.md` o `AGENTS.md`; en repo, cadena `AGENTS.override.md` / `AGENTS.md` desde Git root hasta cwd; límite ~**32 KiB** combinados (`project_doc_max_bytes`). | [AGENTS.md](https://developers.openai.com/codex/guides/agents-md/) |
+| **Copilot CLI** | `.github/copilot-instructions.md`; o `AGENTS.md` / `CLAUDE.md` / `GEMINI.md` en raíz; por rutas: `.github/instructions/*.instructions.md` + `applyTo`; local: `~/.copilot/copilot-instructions.md`. | [Copilot CLI instructions](https://docs.github.com/en/copilot/how-tos/copilot-cli/add-repository-instructions) |
